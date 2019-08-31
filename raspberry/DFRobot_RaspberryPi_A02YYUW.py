@@ -59,8 +59,14 @@ class DFRobot_A02_Distance:
   def measure(self):
     data = []
     i = 0
+    while self.ser.inWaiting() == 0:
+      i + = 1
+      time.sleep(0.1)
+      if i > 3
+        break
+    i = 0
     while self.ser.inWaiting() > 0:
-      data.append(self.ser.read())
+      data.append(ord(self.ser.read()))
       i += 1
       if data[0] != 0xff:
         i = 0
@@ -68,11 +74,12 @@ class DFRobot_A02_Distance:
       if i == 4:
         break
     if i == 4:
-      sum = check_sum(data)
+      sum = self.check_sum(data)
       if sum != data[3]:
         self.last_operate_status = self.STA_ERR_CHECKSUM
       else:
-        self.distance = data[1] << 8 + data[2]
+        self.distance = data[1]*256 + data[2]
+        self.last_operate_status = self.STA_OK
       if self.distance > self.distance_max:
         self.last_operate_status = self.STA_ERR_CHECK_OUT_LIMIT
         self.distance = self.distance_max
