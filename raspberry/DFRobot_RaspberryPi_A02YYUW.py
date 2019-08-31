@@ -32,6 +32,7 @@ class DFRobot_A02_Distance:
   STA_ERR_SERIAL = 0x02
   STA_ERR_CHECK_OUT_LIMIT = 0x03
   STA_ERR_CHECK_LOW_LIMIT = 0x04
+  STA_ERR_DATA = 0x05
 
   ''' last operate status, users can use this variable to determine the result of a function call. '''
   last_operate_status = STA_OK
@@ -78,6 +79,8 @@ class DFRobot_A02_Distance:
       elif self.distance < self.distance_min:
         self.last_operate_status = self.STA_ERR_CHECK_low_LIMIT
         self.distance = self.distance_min
+    else:
+      self.last_operate_status = self.STA_ERR_DATA
 
   def getDistance(self):
     self.measure()

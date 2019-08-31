@@ -33,11 +33,14 @@ def print_distance(dis):
     print("Above the upper limit")
   elif board.last_operate_status == board.STA_ERR_CHECK_LOW_LIMIT:
     print("Below the lower limit")
+  elif board.last_operate_status == board.STA_ERR_DATA:
+    print("No data!")
 
 if __name__ == "__main__":
-  dis_min = 20   #Minimum ranging threshold: 20mm
-  dis_max = 1000 #Highest ranging threshold: 100mm
-  board.set_dis_range(dis_min, dis_max)
-  distance = board.getDistance()
-  print_distance(distance)
-  sleep(1)
+  while True:
+    dis_min = 20   #Minimum ranging threshold: 20mm
+    dis_max = 1000 #Highest ranging threshold: 100mm
+    board.set_dis_range(dis_min, dis_max)
+    distance = board.getDistance()
+    print_distance(distance)
+    time.sleep(1)
