@@ -43,6 +43,7 @@ class DFRobot_A02_Distance:
   '''Maximum range'''
   distance_max = 4500
   distance_min = 0
+  range_max = 4500
 
   def __init__(self):
     self.ser = serial.Serial("/dev/ttyAMA0", 9600)
@@ -60,9 +61,9 @@ class DFRobot_A02_Distance:
     data = []
     i = 0
     while self.ser.inWaiting() == 0:
-      i + = 1
+      i += 1
       time.sleep(0.1)
-      if i > 3
+      if i > 3:
         break
     i = 0
     while self.ser.inWaiting() > 0:

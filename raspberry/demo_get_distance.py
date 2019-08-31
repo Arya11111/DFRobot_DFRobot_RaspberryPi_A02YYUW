@@ -30,9 +30,9 @@ def print_distance(dis):
   elif board.last_operate_status == board.STA_ERR_SERIAL:
     print("Serial open failed!")
   elif board.last_operate_status == board.STA_ERR_CHECK_OUT_LIMIT:
-    print("Above the upper limit")
+    print("Above the upper limit: %d" %dis)
   elif board.last_operate_status == board.STA_ERR_CHECK_LOW_LIMIT:
-    print("Below the lower limit")
+    print("Below the lower limit: %d" %dis)
   elif board.last_operate_status == board.STA_ERR_DATA:
     print("No data!")
 
