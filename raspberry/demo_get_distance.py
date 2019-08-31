@@ -18,20 +18,20 @@
 
 import time
 
-from DFRobot_RaspberryPi_Expansion_Board import DFRobot_A02_Distance as Board
+from DFRobot_RaspberryPi_A02YYUW import DFRobot_A02_Distance as Board
 
 board = Board()
 
 def print_distance(dis):
   if board.last_operate_status == board.STA_OK:
-    print("Distance %d mm", %dis)
-  elif board.last_operate_status == board.STA_ERR_CHECKSUM
+    print("Distance %d mm" %dis)
+  elif board.last_operate_status == board.STA_ERR_CHECKSUM:
     print("ERROR")
-  elif board.last_operate_status == board.STA_ERR_SERIAL
+  elif board.last_operate_status == board.STA_ERR_SERIAL:
     print("Serial open failed!")
-  elif board.last_operate_status == board.STA_ERR_CHECK_OUT_LIMIT
+  elif board.last_operate_status == board.STA_ERR_CHECK_OUT_LIMIT:
     print("Above the upper limit")
-  elif board.last_operate_status == board.STA_ERR_CHECK_LOW_LIMIT
+  elif board.last_operate_status == board.STA_ERR_CHECK_LOW_LIMIT:
     print("Below the lower limit")
 
 if __name__ == "__main__":
@@ -40,4 +40,4 @@ if __name__ == "__main__":
   board.set_dis_range(dis_min, dis_max)
   distance = board.getDistance()
   print_distance(distance)
-  sleep(1000)
+  sleep(1)

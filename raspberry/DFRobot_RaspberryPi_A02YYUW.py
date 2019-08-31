@@ -21,6 +21,7 @@
 '''
 
 import serial
+
 import time
 
 class DFRobot_A02_Distance:
@@ -43,39 +44,41 @@ class DFRobot_A02_Distance:
   distance_min = 0
 
   def __init__(self):
-    self.ser = serial.Serial("dev/ttyAMA0", 9600)
-    if !self.ser.isOpen():
-      self.last_operate_status = STA_ERR_SERIAL
+    self.ser = serial.Serial("/dev/ttyAMA0", 9600)
+    if self.ser.isOpen() != True:
+      self.last_operate_status = self.STA_ERR_SERIAL
 
   def check_sum(self, l):
     return (l[0] + l[1] + l[2])&0x00ff
 
-  def set_dis_rang(self, min, max):
-    distance_max = max
-    distance_min = min
+  def set_dis_range(self, min, max):
+    self.distance_max = max
+    self.distance_min = min
 
   def measure(self):
     data = []
     i = 0
-    while ser.inWaiting() > 0:
-      data[i] = ser.read()
+    while self.ser.inWaiting() > 0:
+      data.append(self.ser.read())
       i += 1
       if data[0] != 0xff:
         i = 0
+        data = []
       if i == 4:
         break
-    sum = check_sum(data)
-    if sum != data[3]
-      self.last_operate_status = STA_ERR_CHECKSUM
-    else:
-      self.distance = data[1] << 8 + data[2]
-    if self.distance > self.distance_max:
-      self.last_operate_status = STA_ERR_CHECK_OUT_LIMIT
-      self.distance = self.distance_max
-    elif self.distance < self.distance_min
-      self.last_operate_status = STA_ERR_CHECK_low_LIMIT
-      self.distance = self.distance_min
+    if i == 4:
+      sum = check_sum(data)
+      if sum != data[3]:
+        self.last_operate_status = self.STA_ERR_CHECKSUM
+      else:
+        self.distance = data[1] << 8 + data[2]
+      if self.distance > self.distance_max:
+        self.last_operate_status = self.STA_ERR_CHECK_OUT_LIMIT
+        self.distance = self.distance_max
+      elif self.distance < self.distance_min:
+        self.last_operate_status = self.STA_ERR_CHECK_low_LIMIT
+        self.distance = self.distance_min
 
   def getDistance(self):
-    measure()
+    self.measure()
     return self.distance
