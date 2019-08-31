@@ -74,6 +74,7 @@ class DFRobot_A02_Distance:
         data = []
       if i == 4:
         break
+    self.ser.read(self.ser.inWaiting())
     if i == 4:
       sum = self.check_sum(data)
       if sum != data[3]:

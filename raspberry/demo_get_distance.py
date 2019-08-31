@@ -37,10 +37,9 @@ def print_distance(dis):
     print("No data!")
 
 if __name__ == "__main__":
+  dis_min = 20   #Minimum ranging threshold: 20mm
+  dis_max = 1000 #Highest ranging threshold: 100mm
+  board.set_dis_range(dis_min, dis_max)
   while True:
-    dis_min = 20   #Minimum ranging threshold: 20mm
-    dis_max = 1000 #Highest ranging threshold: 100mm
-    board.set_dis_range(dis_min, dis_max)
     distance = board.getDistance()
     print_distance(distance)
-    time.sleep(1)
